@@ -1,4 +1,4 @@
-import {HttpClient} from  'aurelia-fetch-client';
+import {HttpClient, json} from  'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 
 @inject(HttpClient)
@@ -8,7 +8,10 @@ export class App {
 
     http.configure(config => {
       config
-        .withBaseUrl('someBaseUrl/');
+        .withBaseUrl('')
+        .withDefaults({
+          mode: 'cors'
+        });
     });
 
     this.http = http;
@@ -16,10 +19,13 @@ export class App {
   }
 
   clickButton() {
-    this.http.fetch('https://jsonplaceholder.typicode.com/posts/1')
+    // http://jsonplaceholder.typicode.com/posts/1
+    // http://localhost:12345/getdata
+    this.http.fetch('http://localhost:12345/getdata')
       .then(response => response.json())
       .then(data => {
-        this.message = data.title;
+        console.log(data.Name);
+        this.message = data.Name;
       })
   
   }

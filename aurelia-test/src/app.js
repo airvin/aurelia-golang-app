@@ -17,23 +17,34 @@ export class App {
 
     this.http = http;
     this.taskQueue = taskQueue;
-    this.message = 'Aurelia GoLang application';
-    this.count = 0;
+    this.message = 'Welcome to Neverending Trivia';
+    this.answer = "";
+    this.count = 8;
     this.updateTime(this.count);
+    this.response = "";
+    this.feedback = "";
+
   }
 
   updateTime(count) {
-    if (this.count<10) {
+    if (this.count<4) {
       this.count = parseInt(count)+1;
-    } else {
+    } else if (this.count<8) {
+      this.feedback = this.answer[0] + "_ ".repeat(this.answer.length-1);
+      this.count = parseInt(count)+1;
+      if (this.count==8) {this.feedback = this.answer}
+    } else { 
       this.http.fetch('http://localhost:3000/getdata')
       .then(response => response.json())
       .then(data => {
         console.log(data.Name);
         this.message = data.Name;
+        this.answer = data.Answer
+        console.log(data.Answer);
       })
       this.count = 0;
-    }
+      this.feedback = "";
+    } 
     this.taskQueue.queueMicroTask(() => {
       console.log("count is: " + this.count);
       window.setTimeout(() => {
@@ -42,13 +53,15 @@ export class App {
     });
   }
 
-  clickButton() {
-    this.http.fetch('http://localhost:3000/getdata')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.Name);
-        this.message = data.Name;
-      })
+  formSubmit() {
+    if (this.response == this.answer) {
+      this.feedback = "Correct";
+      this.count = 5;
+    } else {
+      this.feedback ="Incorrect";
+    }
   }
+
+  
 
 }

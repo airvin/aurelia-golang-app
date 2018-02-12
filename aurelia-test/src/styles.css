@@ -1,10 +1,55 @@
 
+body {
+  margin: 0;
+}
+
+header {
+  height: 50px;
+  background-color: #1C1E38;
+}
+
 h1 {
   text-align: center;
-  color: blue;
+  color: #8C8C8C;
   font-family: Arial, Helvetica, sans-serif;
+  padding:50px;
 }
 
 h2 {
   text-align: center;
+}
+
+h3 {
+  text-align: center;
+  color: #8C8C8C;
+  font-family: Arial, Helvetica, sans-serif;
+  padding:50px;
+}
+
+.form-input {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid #49FF5C;
+  margin: 10px;
+
+}
+
+input[type=text]:focus {
+  -webkit-input-placeholder-color: transparent;
+  outline: none;
+  border: none;
+}
+
+input[type=text]:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+button {
+  background-color: #D9D9D9;
+  border: none;
+  height: 28px;
 }

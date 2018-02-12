@@ -1,6 +1,13 @@
 <template>
   <require from="styles.css"></require>
+  <header></header>
   <h1>${message}</h1>
   <h2>${count}</h2>
-  <button click.delegate="clickButton()">Click Me</button>
+  <form submit.delegate="formSubmit()">
+    <div class="form-input">
+      <input type="text" value.bind="response" placeholder="Type answer">
+      <button type="submit">Go</button>
+    </div>
+  </form>
+  <h3>${feedback}</h3>
 </template>
